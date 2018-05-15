@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 /*
  草食獣クラス
@@ -14,16 +15,18 @@ public class Herbivore : MonoBehaviour
 	public float MoveSpeed;
 	public int FullEatGrass;
 
+	private Transform Grass;
 	private GameManager GameManagerObject;
-	private CharacterController HerbivoreController;
 	private int EatGrass = 0;
+	private NavMeshAgent nav;
 
 	void Start()
 	{
 		GameObject ManagerObject = GameObject.Find("GameManager");
 		GameManagerObject = ManagerObject.GetComponent<GameManager>();
 
-		HerbivoreController = GetComponent<CharacterController>();
+		nav = GetComponent<NavMeshAgent>();
+		Grass = GameObject.FindGameObjectWithTag( "Grass" ).transform;
 
 		EatGrass = 0;
 	}
@@ -43,18 +46,16 @@ public class Herbivore : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		Move();
+		/* 移動処理 */
+		if( Grass != null ){
+			nav.SetDestination( Grass.position );
+		}
+		else{
+			Grass = GameObject.FindGameObjectWithTag( "Grass" ).transform;
+			nav.SetDestination( Grass.position );
+		}
 
 		LimitPosition();
-	}
-
-	/* 移動処理 */
-	void Move()
-	{
-		Vector3 MoveDirection = new Vector3( Random.Range( -1, 2 ), 0, Random.Range( -1, 2 ) );
-		MoveDirection *= MoveSpeed;
-//		Debug.Log( MoveDirection );
-		HerbivoreController.Move( MoveDirection * Time.deltaTime );
 	}
 
 	/* 座標の調整 */
@@ -79,7 +80,7 @@ public class Herbivore : MonoBehaviour
 		}
 	}
 
-	void OnControllerColliderHit( ControllerColliderHit other )
+	void OnCollisionEnter( Collision other )
 	{
 		if( other.gameObject.CompareTag("Grass") ){
 //			Debug.Log( "Hit" );
