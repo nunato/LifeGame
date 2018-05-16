@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 /*
  肉食獣クラス
@@ -14,16 +15,14 @@ public class Carnivore : MonoBehaviour
 	public float MoveSpeed;
 	public int FullEatHerbivore;
 
-	private GameManager GameManagerObject;
-	private CharacterController CarnivoreController;
+	private Transform Herbivore;
 	private int EatHerbivore = 0;
+	private NavMeshAgent nav;
 
 	void Start()
 	{
-		GameObject ManagerObject = GameObject.Find("GameManager");
-		GameManagerObject = ManagerObject.GetComponent<GameManager>();
-
-		CarnivoreController = GetComponent<CharacterController>();
+		nav = GetComponent<NavMeshAgent>();
+		Herbivore = GameObject.FindGameObjectWithTag( "Herbivore" ).transform;
 
 		EatHerbivore = 0;
 	}
@@ -43,45 +42,19 @@ public class Carnivore : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		Move();
-
-		LimitPosition();
-	}
-	/* 移動処理 */
-	void Move()
-	{
-		Vector3 MoveDirection = new Vector3( Random.Range( -1, 2 ), 0, Random.Range( -1, 2 ) );
-		MoveDirection *= MoveSpeed;
-//		Debug.Log( MoveDirection );
-		CarnivoreController.Move( MoveDirection * Time.deltaTime );
-	}
-
-	/* 座標の調整 */
-	void LimitPosition()
-	{
-		/* RigitBodyがないのでy座標を固定できないので */
-		if( transform.position.y != 0 ){
-			transform.position = new Vector3( transform.position.x, 0, transform.position.z );
+		/* 移動処理 */
+		if( Herbivore != null ){
+			nav.SetDestination( Herbivore.position );
 		}
-
-		if( transform.position.x > GameManagerObject.BoardLimitLeft ){
-			transform.position = new Vector3( GameManagerObject.BoardLimitLeft, 0, transform.position.z );
-		}
-		else if( transform.position.x < -GameManagerObject.BoardLimitLeft ){
-			transform.position = new Vector3( -GameManagerObject.BoardLimitLeft, 0, transform.position.z );
-		}
-		if( transform.position.z > GameManagerObject.BoardLimitTop ){
-			transform.position = new Vector3( transform.position.x, 0, GameManagerObject.BoardLimitTop );
-		}
-		else if( transform.position.z < -GameManagerObject.BoardLimitTop ){
-			transform.position = new Vector3( transform.position.x, 0, -GameManagerObject.BoardLimitTop );
+		else{
+			Herbivore = GameObject.FindGameObjectWithTag( "Herbivore" ).transform;
+			nav.SetDestination( Herbivore.position );
 		}
 	}
 
-	void OnControllerColliderHit( ControllerColliderHit other )
+	void OnCollisionEnter( Collision other )
 	{
 		if( other.gameObject.CompareTag("Herbivore") ){
-//			Debug.Log( "Hit" );
 			++EatHerbivore;
 			Destroy( other.gameObject );
 		}

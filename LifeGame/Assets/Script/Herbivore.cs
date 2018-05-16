@@ -16,15 +16,11 @@ public class Herbivore : MonoBehaviour
 	public int FullEatGrass;
 
 	private Transform Grass;
-	private GameManager GameManagerObject;
 	private int EatGrass = 0;
 	private NavMeshAgent nav;
 
 	void Start()
 	{
-		GameObject ManagerObject = GameObject.Find("GameManager");
-		GameManagerObject = ManagerObject.GetComponent<GameManager>();
-
 		nav = GetComponent<NavMeshAgent>();
 		Grass = GameObject.FindGameObjectWithTag( "Grass" ).transform;
 
@@ -53,30 +49,6 @@ public class Herbivore : MonoBehaviour
 		else{
 			Grass = GameObject.FindGameObjectWithTag( "Grass" ).transform;
 			nav.SetDestination( Grass.position );
-		}
-
-		LimitPosition();
-	}
-
-	/* 座標の調整 */
-	void LimitPosition()
-	{
-		/* RigitBodyがないのでy座標を固定できないので */
-		if( transform.position.y != 0 ){
-			transform.position = new Vector3( transform.position.x, 0, transform.position.z );
-		}
-
-		if( transform.position.x > GameManagerObject.BoardLimitLeft ){
-			transform.position = new Vector3( GameManagerObject.BoardLimitLeft, 0, transform.position.z );
-		}
-		else if( transform.position.x < -GameManagerObject.BoardLimitLeft ){
-			transform.position = new Vector3( -GameManagerObject.BoardLimitLeft, 0, transform.position.z );
-		}
-		if( transform.position.z > GameManagerObject.BoardLimitTop ){
-			transform.position = new Vector3( transform.position.x, 0, GameManagerObject.BoardLimitTop );
-		}
-		else if( transform.position.z < -GameManagerObject.BoardLimitTop ){
-			transform.position = new Vector3( transform.position.x, 0, -GameManagerObject.BoardLimitTop );
 		}
 	}
 
