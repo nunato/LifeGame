@@ -7,10 +7,9 @@ using UnityEngine;
  */
 public class GameManager : MonoBehaviour
 {
-	public float LimitLeft = 20;
-	public float LimitTop = 11;
-
-	private float CountTime = 0;
+	private float LimitLeft = 20;
+	private float LimitTop = 11;
+	private bool isGameOver = false;
 
 	public float BoardLimitLeft
 	{
@@ -22,9 +21,19 @@ public class GameManager : MonoBehaviour
 		get{ return LimitTop;}
 	}
 
+	public bool SetGameOver
+	{
+		set{ isGameOver = value;}
+	}
+
 	void Update()
 	{
-		CountTime += Time.deltaTime;
-//		Debug.Log("Time: " + CountTime);
+		if( isGameOver == true ){
+#if UNITY_EDITOR
+			UnityEditor.EditorApplication.isPlaying = false;
+#else
+			Application.Quit();
+#endif
+		}
 	}
 }

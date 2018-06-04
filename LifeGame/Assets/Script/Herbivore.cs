@@ -18,11 +18,17 @@ public class Herbivore : MonoBehaviour
 	private Transform Grass;
 	private int EatGrass = 0;
 	private NavMeshAgent nav;
+	private GameManager gameMgr;
 
 	void Start()
 	{
 		nav = GetComponent<NavMeshAgent>();
-		Grass = GameObject.FindGameObjectWithTag( "Grass" ).transform;
+		GameObject GrassObj = GameObject.FindGameObjectWithTag("Grass");
+		if( GrassObj != null ){
+			Grass = GrassObj.transform;
+		}
+
+		gameMgr = GameObject.Find("GameManager").GetComponent<GameManager>();
 
 		EatGrass = 0;
 	}
@@ -47,15 +53,21 @@ public class Herbivore : MonoBehaviour
 			nav.SetDestination( Grass.position );
 		}
 		else{
-			Grass = GameObject.FindGameObjectWithTag( "Grass" ).transform;
-			nav.SetDestination( Grass.position );
+			GameObject GrassObj = GameObject.FindGameObjectWithTag("Grass");
+			if( GrassObj != null ){
+				Grass = GrassObj.transform;
+				nav.SetDestination( Grass.position );
+			}
+			/* 見つからなかったとき */
+			else{
+				gameMgr.SetGameOver = true;
+			}
 		}
 	}
 
 	void OnCollisionEnter( Collision other )
 	{
 		if( other.gameObject.CompareTag("Grass") ){
-//			Debug.Log( "Hit" );
 			++EatGrass;
 			Destroy( other.gameObject );
 		}

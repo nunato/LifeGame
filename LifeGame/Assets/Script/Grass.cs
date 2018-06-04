@@ -27,7 +27,7 @@ public class Grass : MonoBehaviour
 
 	IEnumerator Spawn()
 	{
-		/* 生成時に増殖しないようにフラグを作った */
+		/* 生成時に増殖しないようにフラグ */
 		bool IsStart = true;
 		while(true){
 			if( IsStart == false && SpawnCount < SpawnLimit ){

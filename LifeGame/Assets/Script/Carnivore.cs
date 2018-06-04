@@ -18,11 +18,17 @@ public class Carnivore : MonoBehaviour
 	private Transform Herbivore;
 	private int EatHerbivore = 0;
 	private NavMeshAgent nav;
+	private GameManager gameMgr;
 
 	void Start()
 	{
 		nav = GetComponent<NavMeshAgent>();
-		Herbivore = GameObject.FindGameObjectWithTag( "Herbivore" ).transform;
+		GameObject HerbObj = GameObject.FindGameObjectWithTag("Herbivore");
+		if( HerbObj != null ){
+			Herbivore = HerbObj.transform;
+		}
+
+		gameMgr = GameObject.Find("GameManager").GetComponent<GameManager>();
 
 		EatHerbivore = 0;
 	}
@@ -47,8 +53,15 @@ public class Carnivore : MonoBehaviour
 			nav.SetDestination( Herbivore.position );
 		}
 		else{
-			Herbivore = GameObject.FindGameObjectWithTag( "Herbivore" ).transform;
-			nav.SetDestination( Herbivore.position );
+			GameObject HerbObj = GameObject.FindGameObjectWithTag("Herbivore");
+			if( HerbObj != null ){
+				Herbivore = HerbObj.transform;
+				nav.SetDestination( Herbivore.position );
+			}
+			/* 見つからなかったとき */
+			else{
+				gameMgr.SetGameOver = true;
+			}
 		}
 	}
 
