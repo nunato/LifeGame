@@ -18,7 +18,8 @@ public class Herbivore : MonoBehaviour
 	private Transform Grass;
 	private int EatGrass = 0;
 	private NavMeshAgent nav;
-	private GameManager gameMgr;
+	//private GameManager gameMgr;
+	private int Life = 500;
 
 	void Start()
 	{
@@ -28,7 +29,7 @@ public class Herbivore : MonoBehaviour
 			Grass = GrassObj.transform;
 		}
 
-		gameMgr = GameObject.Find("GameManager").GetComponent<GameManager>();
+		//gameMgr = GameObject.Find("GameManager").GetComponent<GameManager>();
 
 		EatGrass = 0;
 	}
@@ -38,6 +39,14 @@ public class Herbivore : MonoBehaviour
 		if( EatGrass > FullEatGrass ){
 			EatGrass = 0;
 			Birth();
+		}
+
+		/* 寿命 */
+		if( Life == 0 ){
+			Destroy( gameObject );
+		}
+		else{
+			Life--;
 		}
 	}
 	/* 生成処理 */
@@ -60,7 +69,11 @@ public class Herbivore : MonoBehaviour
 			}
 			/* 見つからなかったとき */
 			else{
-				gameMgr.SetGameOver = true;
+				//gameMgr.SetGameOver = true;
+				//動きを止める
+				Rigidbody ThisRby = GetComponent<Rigidbody>();
+				ThisRby.velocity = Vector3.zero;
+				ThisRby.angularVelocity = Vector3.zero;
 			}
 		}
 	}
