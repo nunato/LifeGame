@@ -33,8 +33,8 @@ public class Grass : MonoBehaviour
 			if( IsStart == false && SpawnCount < SpawnLimit ){
 				Vector3 NewPosition;
 				NewPosition.y = 0;
-				NewPosition.x = Random.Range( -( GameManagerObject.BoardLimitLeft ), GameManagerObject.BoardLimitLeft );
-				NewPosition.z = Random.Range( -( GameManagerObject.BoardLimitTop ), GameManagerObject.BoardLimitTop );
+				NewPosition.x = Random.Range( 0.5f, GameManagerObject.BoardLimitLeft - 0.5f );
+				NewPosition.z = Random.Range( 0.5f, GameManagerObject.BoardLimitTop - 0.5f );
 
 				Instantiate( GrassObject, NewPosition, Quaternion.identity );
 				++SpawnCount;

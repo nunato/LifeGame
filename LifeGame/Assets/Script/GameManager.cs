@@ -7,8 +7,8 @@ using UnityEngine;
  */
 public class GameManager : MonoBehaviour
 {
-	private float LimitLeft = 20;
-	private float LimitTop = 11;
+	private float LimitLeft = 40;
+	private float LimitTop = 22;
 	private bool isGameOver = false;
 
 	public float BoardLimitLeft
