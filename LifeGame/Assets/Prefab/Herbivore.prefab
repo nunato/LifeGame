@@ -22,9 +22,11 @@ GameObject:
   - component: {fileID: 33503790716894880}
   - component: {fileID: 65356618222347896}
   - component: {fileID: 23516709891425646}
-  - component: {fileID: 114447589109404386}
-  - component: {fileID: 143345164620810184}
   - component: {fileID: 195835864902434572}
+  - component: {fileID: 54392251012486856}
+  - component: {fileID: 114099496137576070}
+  - component: {fileID: 114376479034197756}
+  - component: {fileID: 114680395066734100}
   m_Layer: 0
   m_Name: Herbivore
   m_TagString: Herbivore
@@ -39,7 +41,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1835517421597560}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 19.9, y: 0, z: 5.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,6 +85,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1835517421597560}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &54392251012486856
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1835517421597560}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &65356618222347896
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -95,7 +112,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114447589109404386
+--- !u!114 &114099496137576070
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -103,29 +120,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 1835517421597560}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d84a12e2469ded147a126f7e88095e1b, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d3cfa92dbdada04485b8ff280d28d66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HerbivoreObject: {fileID: 1835517421597560}
-  MoveSpeed: 10
-  FullEatGrass: 3
---- !u!143 &143345164620810184
-CharacterController:
+  MoveSpeed: 5
+--- !u!114 &114376479034197756
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1835517421597560}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 1
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7461c686376a61c448ceb052d3af9aca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextBirthCount: 2
+--- !u!114 &114680395066734100
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1835517421597560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68ae8ddface1d74da693f45ac0e8552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectLifeFrame: 500
 --- !u!195 &195835864902434572
 NavMeshAgent:
   m_ObjectHideFlags: 1

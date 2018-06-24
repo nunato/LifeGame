@@ -22,9 +22,11 @@ GameObject:
   - component: {fileID: 33558649415721358}
   - component: {fileID: 65740916557051508}
   - component: {fileID: 23829309587668570}
-  - component: {fileID: 114972360257328980}
   - component: {fileID: 195240063320677158}
   - component: {fileID: 54742994595259146}
+  - component: {fileID: 114974543585353524}
+  - component: {fileID: 114757183739022216}
+  - component: {fileID: 114168916360904842}
   m_Layer: 0
   m_Name: Carnivore
   m_TagString: Carnivore
@@ -39,7 +41,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1472301214629060}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 20.44, y: 0, z: 12.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -110,7 +112,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114972360257328980
+--- !u!114 &114168916360904842
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -118,12 +120,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 1472301214629060}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94bb890d2a478d54dbd5e5e8d7c6689f, type: 3}
+  m_Script: {fileID: 11500000, guid: c68ae8ddface1d74da693f45ac0e8552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CarnivoreObject: {fileID: 1472301214629060}
-  MoveSpeed: 20
-  FullEatHerbivore: 4
+  ObjectLifeFrame: 500
+--- !u!114 &114757183739022216
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1472301214629060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7461c686376a61c448ceb052d3af9aca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextBirthCount: 3
+--- !u!114 &114974543585353524
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1472301214629060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d3cfa92dbdada04485b8ff280d28d66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveSpeed: 5
 --- !u!195 &195240063320677158
 NavMeshAgent:
   m_ObjectHideFlags: 1
