@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class AnimalDeath : MonoBehaviour
 {
-	public int		ObjectLifeFrame;
+	public int			ObjectLifeFrame;
 
-	private int		Frame;
+	private int			Frame;
+	private GameObject	GrassPrefab;
 
 	void Start()
 	{
 		Frame = ObjectLifeFrame;
+
+		GrassPrefab = (GameObject)Resources.Load("Prefabs/Grass");
 	}
 
 	void Update()
@@ -23,6 +26,7 @@ public class AnimalDeath : MonoBehaviour
 	{
 		if( Frame == 0 ){
 			Destroy( gameObject );
+			Instantiate( GrassPrefab, transform.position, Quaternion.identity );
 		}
 		else{
 			Frame--;

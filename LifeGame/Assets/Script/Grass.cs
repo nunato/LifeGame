@@ -11,7 +11,6 @@ using UnityEngine;
 public class Grass : MonoBehaviour
 {
 	public float SpawnTimeSec = 100;
-	public GameObject GrassObject;
 	public int SpawnLimit = 100;
 
 	private static int SpawnCount = 0;
@@ -36,7 +35,7 @@ public class Grass : MonoBehaviour
 				NewPosition.x = Random.Range( 0.5f, GameManagerObject.BoardLimitLeft - 0.5f );
 				NewPosition.z = Random.Range( 0.5f, GameManagerObject.BoardLimitTop - 0.5f );
 
-				Instantiate( GrassObject, NewPosition, Quaternion.identity );
+				Instantiate( gameObject, NewPosition, Quaternion.identity );
 				++SpawnCount;
 			}
 			IsStart = false;
