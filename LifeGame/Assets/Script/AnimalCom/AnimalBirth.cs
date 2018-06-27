@@ -32,7 +32,7 @@ public class AnimalBirth : MonoBehaviour
 
 	void OnCollisionEnter( Collision other )
 	{
-		if( other.gameObject.CompareTag( TargetTag ) ){
+		if( TargetTag != null && other.gameObject.CompareTag( TargetTag ) ){
 			++TargetCount;
 			Destroy( other.gameObject );
 		}

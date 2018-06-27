@@ -7,28 +7,41 @@ using UnityEngine;
  */
 public class GameManager : MonoBehaviour
 {
-	private float LimitLeft = 40;
-	private float LimitTop = 22;
-	private bool isGameOver = false;
-
-	public float BoardLimitLeft
-	{
-		get{ return LimitLeft;}
+	public enum GameStateList{
+		SETUP,		/* 初期生成 */
+		PLAYING,	/* ゲーム中 */
+		END,		/* 終了状態 */
 	}
 
-	public float BoardLimitTop
+	private float GameBoardWidth = 40;
+	private float GameBoardHeight = 22;
+
+	private GameStateList SequenceState;
+
+	public float BoardWidth
 	{
-		get{ return LimitTop;}
+		get{ return GameBoardWidth;}
 	}
 
-	public bool SetGameOver
+	public float BoardHeight
 	{
-		set{ isGameOver = value;}
+		get{ return GameBoardHeight;}
+	}
+
+	public GameStateList GameSequenceStetas
+	{
+		set{ SequenceState = value;}
+		get{ return SequenceState;}
+	}
+
+	void Start()
+	{
+		SequenceState = GameStateList.SETUP;
 	}
 
 	void Update()
 	{
-		if( isGameOver == true ){
+		if( SequenceState == GameStateList.END ){
 #if UNITY_EDITOR
 			UnityEditor.EditorApplication.isPlaying = false;
 #else
