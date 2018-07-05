@@ -26,7 +26,9 @@ public class AnimalDeath : MonoBehaviour
 	{
 		if( Frame == 0 ){
 			Destroy( gameObject );
-			Instantiate( GrassPrefab, transform.position, Quaternion.identity );
+			if( gameObject.tag == "Carnivore" ){
+				Instantiate( GrassPrefab, transform.position, Quaternion.identity );
+			}
 		}
 		else{
 			Frame--;

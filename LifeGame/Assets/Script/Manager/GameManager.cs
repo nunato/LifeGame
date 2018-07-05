@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /*
  ゲーム管理クラス
@@ -17,6 +18,9 @@ public class GameManager : MonoBehaviour
 	private float GameBoardHeight = 22;
 
 	private GameStateList SequenceState;
+	[SerializeField]private GameObject PanelObj;
+	[SerializeField]private GameObject TextObj;
+	private float GameTime;
 
 	public float BoardWidth
 	{
@@ -37,16 +41,21 @@ public class GameManager : MonoBehaviour
 	void Start()
 	{
 		SequenceState = GameStateList.SETUP;
+		GameTime = 0;
 	}
 
 	void Update()
 	{
-		if( SequenceState == GameStateList.END ){
-#if UNITY_EDITOR
-			UnityEditor.EditorApplication.isPlaying = false;
-#else
-			Application.Quit();
-#endif
+		GameTime += Time.deltaTime;
+		if( GameObject.FindWithTag("Carnivore") == null	&&
+			GameObject.FindWithTag("Herbivore") == null	&&
+			SequenceState != GameStateList.END			){
+			SequenceState = GameStateList.END;
+			PanelObj.SetActive(true);
+			TextObj.SetActive(true);
+			Text targetText = TextObj.GetComponent<Text>();
+			int ActiveTime = (int)GameTime;
+			targetText.text = "生存期間: " + ActiveTime + "秒";
 		}
 	}
 }
