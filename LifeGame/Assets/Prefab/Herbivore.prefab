@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 114099496137576070}
   - component: {fileID: 114376479034197756}
   - component: {fileID: 114680395066734100}
+  - component: {fileID: 114109906737817268}
   m_Layer: 0
   m_Name: Herbivore
   m_TagString: Herbivore
@@ -124,6 +125,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 5
+--- !u!114 &114109906737817268
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1835517421597560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b25e080640277c4887ede6a0d03eada, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114376479034197756
 MonoBehaviour:
   m_ObjectHideFlags: 1

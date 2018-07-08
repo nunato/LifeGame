@@ -10,7 +10,8 @@ public class CreatGenerator : MonoBehaviour
 	[SerializeField]private GameObject	Carnivore;
 	[SerializeField]private GameObject	Herbivore;
 	[SerializeField]private GameObject	Grass;
-	private GameManager	Manager;
+	private SequenceManager	SequenceMgr;
+	private BoardManager	BoardMgr;
 	private int			CarnivoreCount = 1;
 	private int			HerbivoreCount = 4;
 	private int			GrassCount = 12;
@@ -18,11 +19,12 @@ public class CreatGenerator : MonoBehaviour
 	void Start()
 	{
 		GameObject MngObj = GameObject.Find("GameManager");
-		Manager = MngObj.GetComponent<GameManager>();
+		BoardMgr = MngObj.GetComponent<BoardManager>();
+		SequenceMgr = MngObj.GetComponent<SequenceManager>();
 
-		if( Manager.GameSequenceStetas == GameManager.GameStateList.SETUP ){
+		if( SequenceMgr.GameSequenceStetas == SequenceManager.GameStateList.SETUP ){
 			CreateCreat();
-			Manager.GameSequenceStetas = GameManager.GameStateList.PLAYING;
+			SequenceMgr.GameSequenceStetas = SequenceManager.GameStateList.PLAYING;
 		}
 	}
 
@@ -31,22 +33,22 @@ public class CreatGenerator : MonoBehaviour
 		for( int i = 0; i < CarnivoreCount; i++ ){
 			Vector3 NewPosition;
 			NewPosition.y = 0;
-			NewPosition.x = Random.Range( 0.5f, Manager.BoardWidth - 0.5f );
-			NewPosition.z = Random.Range( 0.5f, Manager.BoardHeight - 0.5f );
+			NewPosition.x = Random.Range( 0.5f, BoardMgr.BoardWidth - 0.5f );
+			NewPosition.z = Random.Range( 0.5f, BoardMgr.BoardHeight - 0.5f );
 			Instantiate( Carnivore, NewPosition, Quaternion.identity );
 		}
 		for( int i = 0; i < HerbivoreCount; i++ ){
 			Vector3 NewPosition;
 			NewPosition.y = 0;
-			NewPosition.x = Random.Range( 0.5f, Manager.BoardWidth - 0.5f );
-			NewPosition.z = Random.Range( 0.5f, Manager.BoardHeight - 0.5f );
+			NewPosition.x = Random.Range( 0.5f, BoardMgr.BoardWidth - 0.5f );
+			NewPosition.z = Random.Range( 0.5f, BoardMgr.BoardHeight - 0.5f );
 			Instantiate( Herbivore, NewPosition, Quaternion.identity );
 		}
 		for( int i = 0; i < GrassCount; i++ ){
 			Vector3 NewPosition;
 			NewPosition.y = 0;
-			NewPosition.x = Random.Range( 0.5f, Manager.BoardWidth - 0.5f );
-			NewPosition.z = Random.Range( 0.5f, Manager.BoardHeight - 0.5f );
+			NewPosition.x = Random.Range( 0.5f, BoardMgr.BoardWidth - 0.5f );
+			NewPosition.z = Random.Range( 0.5f, BoardMgr.BoardHeight - 0.5f );
 			Instantiate( Grass, NewPosition, Quaternion.identity );
 		}
 	}

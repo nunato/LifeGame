@@ -6,7 +6,7 @@ using UnityEngine.UI;
 /*
  ゲーム管理クラス
  */
-public class GameManager : MonoBehaviour
+public class SequenceManager : MonoBehaviour
 {
 	public enum GameStateList{
 		SETUP,		/* 初期生成 */
@@ -14,23 +14,14 @@ public class GameManager : MonoBehaviour
 		END,		/* 終了状態 */
 	}
 
-	private float GameBoardWidth = 40;
-	private float GameBoardHeight = 22;
-
 	private GameStateList SequenceState;
+	[SerializeField]private Carnivore CarnivoreObj;
+	[SerializeField]private Herbivore HerbivoreObj;
 	[SerializeField]private GameObject PanelObj;
-	[SerializeField]private GameObject TextObj;
-	private float GameTime;
-
-	public float BoardWidth
-	{
-		get{ return GameBoardWidth;}
-	}
-
-	public float BoardHeight
-	{
-		get{ return GameBoardHeight;}
-	}
+	[SerializeField]private Text LifeTimeText;
+	[SerializeField]private Text CarnivoreCountText;
+	[SerializeField]private Text HarbivoreCountText;
+	private static float GameTime = 0;
 
 	public GameStateList GameSequenceStetas
 	{
@@ -41,7 +32,6 @@ public class GameManager : MonoBehaviour
 	void Start()
 	{
 		SequenceState = GameStateList.SETUP;
-		GameTime = 0;
 	}
 
 	void Update()
@@ -52,10 +42,10 @@ public class GameManager : MonoBehaviour
 			SequenceState != GameStateList.END			){
 			SequenceState = GameStateList.END;
 			PanelObj.SetActive(true);
-			TextObj.SetActive(true);
-			Text targetText = TextObj.GetComponent<Text>();
 			int ActiveTime = (int)GameTime;
-			targetText.text = "生存期間: " + ActiveTime + "秒";
+			LifeTimeText.text = "生存期間: " + ActiveTime + " 秒";
+			CarnivoreCountText.text = "肉食獣: " + CarnivoreObj.MaxCarnivoreCount + " 体";
+			HarbivoreCountText.text = "草食獣: " + HerbivoreObj.MaxHarbivoreCount + " 体";
 		}
 	}
 }

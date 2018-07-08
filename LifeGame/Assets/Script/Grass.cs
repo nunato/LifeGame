@@ -14,12 +14,14 @@ public class Grass : MonoBehaviour
 	public int SpawnLimit = 100;
 
 	private static int SpawnCount = 0;
-	private GameManager GameManagerObject;
+	private BoardManager BoardMgr;
+	private SequenceManager SequenceMgr;
 
 	void Start()
 	{
 		GameObject ManagerObject = GameObject.Find("GameManager");
-		GameManagerObject = ManagerObject.GetComponent<GameManager>();
+		BoardMgr = ManagerObject.GetComponent<BoardManager>();
+		SequenceMgr = ManagerObject.GetComponent<SequenceManager>();
 
 		StartCoroutine( Spawn() );
 	}
@@ -29,11 +31,13 @@ public class Grass : MonoBehaviour
 		/* 生成時に増殖しないようにフラグ */
 		bool IsStart = true;
 		while(true){
-			if( IsStart == false && SpawnCount < SpawnLimit ){
+			if( IsStart == false &&
+				SpawnCount < SpawnLimit &&
+				SequenceMgr.GameSequenceStetas != SequenceManager.GameStateList.END ){
 				Vector3 NewPosition;
 				NewPosition.y = 0;
-				NewPosition.x = Random.Range( 0.5f, GameManagerObject.BoardWidth - 0.5f );
-				NewPosition.z = Random.Range( 0.5f, GameManagerObject.BoardHeight - 0.5f );
+				NewPosition.x = Random.Range( 0.5f, BoardMgr.BoardWidth - 0.5f );
+				NewPosition.z = Random.Range( 0.5f, BoardMgr.BoardHeight - 0.5f );
 
 				Instantiate( gameObject, NewPosition, Quaternion.identity );
 				++SpawnCount;
