@@ -21,7 +21,10 @@ public class CreatGenerator : MonoBehaviour
 		GameObject MngObj = GameObject.Find("GameManager");
 		BoardMgr = MngObj.GetComponent<BoardManager>();
 		SequenceMgr = MngObj.GetComponent<SequenceManager>();
+	}
 
+	void Update()
+	{
 		if( SequenceMgr.GameSequenceStetas == SequenceManager.GameStateList.SETUP ){
 			CreateCreat();
 			SequenceMgr.GameSequenceStetas = SequenceManager.GameStateList.PLAYING;

@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class SequenceManager : MonoBehaviour
 {
 	public enum GameStateList{
+		START,		/* ゲーム開始 */
 		SETUP,		/* 初期生成 */
 		PLAYING,	/* ゲーム中 */
 		END,		/* 終了状態 */
@@ -31,15 +32,17 @@ public class SequenceManager : MonoBehaviour
 
 	void Start()
 	{
-		SequenceState = GameStateList.SETUP;
+		SequenceState = GameStateList.START;
 	}
 
 	void Update()
 	{
-		GameTime += Time.deltaTime;
+		if( SequenceState == GameStateList.PLAYING ){
+			GameTime += Time.deltaTime;
+		}
 		if( GameObject.FindWithTag("Carnivore") == null	&&
 			GameObject.FindWithTag("Herbivore") == null	&&
-			SequenceState != GameStateList.END			){
+			SequenceState == GameStateList.PLAYING		){
 			SequenceState = GameStateList.END;
 			PanelObj.SetActive(true);
 			int ActiveTime = (int)GameTime;
